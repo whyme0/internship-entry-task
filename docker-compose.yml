@@ -1,0 +1,19 @@
+services:
+  tictactoe-api:
+    build:
+      context: .
+      dockerfile: TicTacToe.Api/Dockerfile
+    container_name: tictactoe-api
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Data Source=/app/database/tictactoe.db
+      - BOARD_SIZE=3
+      - WIN_CONDITION=3
+    volumes:
+      - tictactoe-db:/app/database
+    restart: no
+volumes:
+  tictactoe-db:
